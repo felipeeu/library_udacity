@@ -1,9 +1,13 @@
 import React from 'react'
+import BookList from './BookList'
 
 
 class Search extends React.Component {
-    render() {
 
+    state = {books: []}
+
+    render() {
+        const {books} = this.state
         return (<div className="search-books">
             <div className="search-books-bar">
                 <a className="close-search" onClick={() => this.setState({showSearchPage: false})}>Close</a>
@@ -21,9 +25,22 @@ class Search extends React.Component {
                 </div>
             </div>
             <div className="search-books-results">
-                <ol className="books-grid"></ol>
+                <ol className="books-grid">
+                    {books.map(book => (
+                        <li key={book.id}>
+                            <BookList
+                                id={book.id}
+                                shelf={book.shelf}
+                                authors={book.authors}
+                                title={book.title}
+                                imagelinks={book.imageLinks}
+                            />
+                        </li>))}
+
+                </ol>
             </div>
         </div>)
     }
 }
+
 export default Search

@@ -2,7 +2,19 @@ import React from 'react'
 
 class BookList extends React.Component {
 
+
+    state = {
+        shelf: ''
+    }
+
+    switchBookShelf(value) {
+
+        this.setState({shelf: value})
+    }
+
+
     render() {
+        const {shelf} = this.state
         return (
             <li>
                 <div className="book">
@@ -13,7 +25,7 @@ class BookList extends React.Component {
                             backgroundImage: 'url("http://books.google.com/books/content?id=PGR2AwAAQBAJ&printsec=frontcover&img=1&zoom=1&imgtk=AFLRE73-GnPVEyb7MOCxDzOYF1PTQRuf6nCss9LMNOSWBpxBrz8Pm2_mFtWMMg_Y1dx92HT7cUoQBeSWjs3oEztBVhUeDFQX6-tWlWz1-feexS0mlJPjotcwFqAg6hBYDXuK_bkyHD-y&source=gbs_api")'
                         }}></div>
                         <div className="book-shelf-changer">
-                            <select>
+                            <select value={shelf} onChange={(event)=>this.switchBookShelf(event.target.value)}>
                                 <option value="none" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
