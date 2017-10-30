@@ -2,32 +2,28 @@ import React from 'react'
 
 import BookList from './BookList'
 
-class BookShelf extends React.Component{
+class BookShelf extends React.Component {
 
-    render(){
-        return(
-
+    render() {
+        const {books} = this.props
+        return (
             <div className="bookshelf">
-                <h2 className="bookshelf-title">Currently Reading</h2>
+                <h2 className="bookshelf-title">{this.props.name}</h2>
                 <div className="bookshelf-books">
                     <ol className="books-grid">
-                        <BookList/>
+                        {books && books.map(book =>
+                            <li key={book.id}>
+                                <BookList
+                                    bookid={book.id}
+                                    booktitle={book.title}
+                                    bookshelf={book.shelf}
+                                    imageLinks={book.imageLinks}
+                                />
+                            </li>
+                        )}
                     </ol>
                 </div>
 
-                <h2 className="bookshelf-title">Want to Read</h2>
-                <div className="bookshelf-books">
-                    <ol className="books-grid">
-                        <BookList/>
-                    </ol>
-                </div>
-
-                <h2 className="bookshelf-title">Read</h2>
-                <div className="bookshelf-books">
-                    <ol className="books-grid">
-                        <BookList/>
-                    </ol>
-                </div>
             </div>
         )
     }
