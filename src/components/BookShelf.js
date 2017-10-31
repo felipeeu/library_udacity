@@ -2,37 +2,39 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import BookList from './BookList'
 
-const shelves = ["Currently Read", "Want to Read", "Read"];
- function BookShelf (props) {
+const shelves = ['currentlyReading', 'wantToRead', 'read'];
 
-        const {books,changeBookShelf} = props;
-        return (
+function BookShelf(props) {
 
-            <div className="list-books-content">
-                <div>
-                    {shelves.map(bookshelf => (
-                        <div key={bookshelf} className="bookshelf">
-                            <h2 className="bookshelf-title">{bookshelf}</h2>
-                            <div className="bookshelf-books">
+    const {books, changeBookShelf} = props;
+    return (
 
-                                <BookList
-                                    books={
-                                        books.filter(
-                                            book => book.shelf === bookshelf
-                                        )}
-                                    changeBookShelf={changeBookShelf}
-                                />
+        <div className="list-books-content">
+            <div>
+                {shelves.map(bookshelf => (
+                    <div key={bookshelf} className="bookshelf">
+                        <h2 className="bookshelf-title">{bookshelf}</h2>
+                        <div className="bookshelf-books">
 
-                            </div>
+                            <BookList
+                                books={
+                                    books.filter(
+                                        book => book.shelf === bookshelf
+                                    )}
+                                changeBookShelf={changeBookShelf}
+                            />
 
                         </div>
-                    ))}
-                </div>
-            </div>
 
-        )
+                    </div>
+                ))}
+            </div>
+        </div>
+
+    )
 
 }
+
 BookShelf.propTypes = {
     books: PropTypes.array.isRequired,
 }

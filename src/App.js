@@ -15,7 +15,7 @@ class BooksApp extends React.Component {
          * users can use the browser's back and forward buttons to navigate between
          * pages, as well as provide a good URL they can bookmark and share.
          */
-        books:[],
+        books: [],
         showSearchPage: false
     }
 
@@ -44,7 +44,7 @@ class BooksApp extends React.Component {
                             <h1>MyReads</h1>
                         </div>
                         <BookShelf
-                            book={books}
+                            books={books}
                             changeBookShelf={this.changeBookShelf}
                         />
                         <div className="open-search">

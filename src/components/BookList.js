@@ -5,7 +5,7 @@ function BookList(props) {
     const {books, changeBookShelf} = props
     return (
         <ol className="books-grid">
-            {books && books.map(book =>
+            {books.map(book =>
                 (
                     <li key={book.id}>
                         <div className="book">
