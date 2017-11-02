@@ -1,6 +1,8 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
+import {Route} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 //components
 import Search from './components/Search'
@@ -16,7 +18,7 @@ class BooksApp extends React.Component {
          * pages, as well as provide a good URL they can bookmark and share.
          */
         books: [],
-        showSearchPage: false
+        
     }
 
     componentDidMount() {
@@ -36,22 +38,22 @@ class BooksApp extends React.Component {
         const {books} = this.state;
         return (
             <div className="app">
-                {this.state.showSearchPage ? (
-                    <Search/>
-                ) : (
+
+                <Route path="/search"  component={Search}/>
                     <div className="list-books">
                         <div className="list-books-title">
                             <h1>MyReads</h1>
                         </div>
-                        <BookShelf
-                            books={books}
-                            changeBookShelf={this.changeBookShelf}
-                        />
+                        <Route exact path="/" render={() => (
+                            <BookShelf
+                                books={books}
+                                changeBookShelf={this.changeBookShelf}
+                            />
+                        )} />
                         <div className="open-search">
-                            <a onClick={() => this.setState({showSearchPage: true})}>Add a book</a>
+                            <Link to="/search"> Add a book</Link>
                         </div>
                     </div>
-                )}
             </div>
         )
     }
