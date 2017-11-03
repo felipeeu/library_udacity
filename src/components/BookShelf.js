@@ -15,7 +15,6 @@ function BookShelf(props) {
                     <div key={bookshelf} className="bookshelf">
                         <h2 className="bookshelf-title">{bookshelf}</h2>
                         <div className="bookshelf-books">
-
                             <BookList
                                 books={
                                     books.filter(
