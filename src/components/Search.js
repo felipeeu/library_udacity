@@ -1,7 +1,8 @@
 import React from 'react'
 import * as BooksAPI from '../BooksAPI'
-import BookList from './BookList'
 import {Link} from 'react-router-dom'
+import PropTypes from 'prop-types'
+import BookList from "./BookList";
 
 
 class Search extends React.Component {
@@ -12,18 +13,16 @@ class Search extends React.Component {
     }
 
     updateQuery(query) {
-        BooksAPI.search(query).then(books => books ? this.setState({books}) : []);
-        this.setState({query});
-    }
-
-    changeBookShelf(book, shelf) {
-
-        BooksAPI.update(book, shelf).then(BooksAPI.getAll())
+        const trimmedQuery = query.trim()
+        BooksAPI.search(trimmedQuery, 20).then((books) => {
+            books && books.length > 0 ? this.setState({books: books}) : this.setState({books: []})
+        })
+        this.setState({query: query})
     }
 
     render() {
-        const {books} = this.state
-
+        const {books} = this.state;
+        const {changeBookShelf} = this.props;
         return (
             <div className="search-books">
                 <div className="search-books-bar">
@@ -43,13 +42,14 @@ class Search extends React.Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <BookList
-                        books={books}
-                        changeBookShelf={this.changeBookShelf}
-                    />
+                    <BookList books={books} changeBookShelf={changeBookShelf}/>
                 </div>
             </div>)
     }
 }
 
+Search.propTypes = {
+    books: PropTypes.array.isRequired,
+    changeBookShelf: PropTypes.func.isRequired
+}
 export default Search

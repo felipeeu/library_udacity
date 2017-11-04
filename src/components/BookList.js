@@ -16,7 +16,7 @@ function BookList(props) {
                                     backgroundImage: `url("${book.imageLinks.thumbnail}")`
                                 }}></div>
                                 <div className="book-shelf-changer">
-                                    <select value={book.shelf}
+                                    <select value={'none'}
                                             onChange={(event) => (changeBookShelf(book, event.target.value))}>
                                         <option value="none" disabled>Move to...</option>
                                         <option value="currentlyReading">Currently Reading</option>
@@ -37,7 +37,8 @@ function BookList(props) {
 }
 
 BookList.propTypes = {
-    books: PropTypes.array.isRequired
+    books: PropTypes.array.isRequired,
+    changeBookShelf: PropTypes.func.isRequired
 }
 
 export default BookList
