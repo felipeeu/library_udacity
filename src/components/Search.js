@@ -2,6 +2,7 @@ import React from 'react'
 import * as BooksAPI from '../BooksAPI'
 import {Link} from 'react-router-dom'
 import PropTypes from 'prop-types'
+//Component
 import BookList from "./BookList";
 
 
@@ -9,19 +10,25 @@ class Search extends React.Component {
 
     state = {
         books: [],
-        query: ''
+        query: '',
+        shelf: 'none'
     }
 
-    updateQuery(query) {
+    updateQuery = (query) => {
+        const {books, shelf} = this.state
         const trimmedQuery = query.trim()
-        BooksAPI.search(trimmedQuery, 20).then((books) => {
-            books && books.length > 0 ? this.setState({books: books}) : this.setState({books: []})
+
+        BooksAPI.search(trimmedQuery, 20).then((booksqueried) => {
+            booksqueried && booksqueried.length > 0 ? this.setState({books: booksqueried}) : this.setState({books: []})
         })
-        this.setState({query:query})
+        //Set select to shelf none
+        books.map((book => book.shelf === shelf))
+
+        this.setState({query: query})
     }
 
     render() {
-        const {books} = this.state;
+        const {books, shelf} = this.state;
         const {changeBookShelf} = this.props;
         return (
             <div className="search-books">
@@ -42,7 +49,7 @@ class Search extends React.Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <BookList books={books} changeBookShelf={changeBookShelf}/>
+                    <BookList books={books} changeBookShelf={changeBookShelf} shelf={shelf}/>
                 </div>
             </div>)
     }

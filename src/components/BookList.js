@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function BookList(props) {
-    const {books, changeBookShelf} = props
+const BookList = (props) => {
+    const {books, changeBookShelf, shelf} = props;
     return (
         <ol className="books-grid">
             {books.map(book =>
@@ -16,7 +16,7 @@ function BookList(props) {
                                     backgroundImage: `url("${book.imageLinks.thumbnail}")`
                                 }}></div>
                                 <div className="book-shelf-changer">
-                                    <select value={book.shelf}
+                                    <select value={shelf !== 'none' ? book.shelf : shelf}
                                             onChange={(event) => (changeBookShelf(book, event.target.value))}>
                                         <option value="none" disabled>Move to...</option>
                                         <option value="currentlyReading">Currently Reading</option>
