@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+//Component
 import BookList from './BookList'
 
+//list shelf with its shelf names
 const shelves = [
     {
         shelf: 'currentlyReading',
@@ -16,7 +18,7 @@ const shelves = [
         name: 'Read'
     }];
 
-function BookShelf(props) {
+const BookShelf = (props) => {
     const {books, changeBookShelf} = props;
     return (
         <div className="list-books-content">
@@ -27,6 +29,7 @@ function BookShelf(props) {
                         <div className="bookshelf-books">
                             <BookList
                                 books={
+                                    //filter books by shelves
                                     books.filter(
                                         book => book.shelf === bookshelf.shelf
                                     )}

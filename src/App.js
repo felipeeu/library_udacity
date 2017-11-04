@@ -4,7 +4,7 @@ import './App.css'
 import {Route} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
-//components
+//Components
 import Search from './components/Search'
 import BookShelf from "./components/BookShelf";
 
@@ -13,17 +13,17 @@ class BooksApp extends React.Component {
     state = {
         books: []
     }
-
+    //Get books from API then set books to new state
     getAllBooks = () => {
         BooksAPI.getAll().then((books) => {
             this.setState({books})
         })
     }
-
+    // Invoke getAllBooks after component is mounted
     componentDidMount = () => this.getAllBooks()
 
+    //Change the shelf based on select on BookList component then calls getAllBooks and sets book state
     changeBookShelf = (book, shelf) => {
-
         BooksAPI.update(book, shelf).then(() => this.getAllBooks())
 
     }
@@ -33,7 +33,6 @@ class BooksApp extends React.Component {
 
         return (
             <div className="app">
-
                 <Route path="/search" render={({history}) => (
                     <Search
                         books={books}
@@ -42,7 +41,7 @@ class BooksApp extends React.Component {
                 )}/>
                 <div className="list-books">
                     <div className="list-books-title">
-                        <h1>MyReads</h1>
+                        <h1>Felipe's Books</h1>
                     </div>
                     <Route exact path="/" render={() => (
                         <BookShelf
