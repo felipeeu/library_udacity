@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const BookList = (props) => {
-    const {books, changeBookShelf, shelf} = props;
+    const {books, changeBookShelf} = props;
     return (
         <ol className="books-grid">
             {books.map(book =>
@@ -13,10 +13,10 @@ const BookList = (props) => {
                                 <div className="book-cover" style={{
                                     width: 128,
                                     height: 193,
-                                    backgroundImage: `url("${book.imageLinks.thumbnail}")`
-                                }}></div>
+                                    backgroundImage: `url("${book.imageLinks ? book.imageLinks.thumbnail : book }")`
+                                }}/>
                                 <div className="book-shelf-changer">
-                                    <select value={shelf !== 'none' ? book.shelf : shelf}
+                                    <select value={book.shelf}
                                             onChange={(event) => (changeBookShelf(book, event.target.value))}>
                                         <option value="none" disabled>Move to...</option>
                                         <option value="currentlyReading">Currently Reading</option>
@@ -38,8 +38,7 @@ const BookList = (props) => {
 
 BookList.propTypes = {
     books: PropTypes.array.isRequired,
-    changeBookShelf: PropTypes.func.isRequired,
-    shelf: PropTypes.array
+    changeBookShelf: PropTypes.func.isRequired
 }
 
 export default BookList

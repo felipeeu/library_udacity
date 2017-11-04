@@ -10,25 +10,23 @@ class Search extends React.Component {
 
     state = {
         books: [],
-        query: '',
-        shelf: 'none'
+        query: ''
+
     }
 
     updateQuery = (query) => {
-        const {books, shelf} = this.state
+
         const trimmedQuery = query.trim()
 
         BooksAPI.search(trimmedQuery, 20).then((booksqueried) => {
             booksqueried && booksqueried.length > 0 ? this.setState({books: booksqueried}) : this.setState({books: []})
         })
-        //Set select to shelf none
-        books.map((book => book.shelf === shelf))
 
         this.setState({query: query})
     }
 
     render() {
-        const {books, shelf} = this.state;
+        const {books} = this.state;
         const {changeBookShelf} = this.props;
         return (
             <div className="search-books">
@@ -49,7 +47,7 @@ class Search extends React.Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <BookList books={books} changeBookShelf={changeBookShelf} shelf={shelf}/>
+                    <BookList books={books} changeBookShelf={changeBookShelf} />
                 </div>
             </div>)
     }
