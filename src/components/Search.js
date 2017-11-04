@@ -57,6 +57,7 @@ class Search extends React.Component {
 
 Search.propTypes = {
     books: PropTypes.array.isRequired,
-    changeBookShelf: PropTypes.func.isRequired
+    changeBookShelf: PropTypes.func.isRequired,
+    shelf: PropTypes.array
 }
 export default Search
