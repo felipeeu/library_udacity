@@ -17,7 +17,7 @@ class Search extends React.Component {
         BooksAPI.search(trimmedQuery, 20).then((books) => {
             books && books.length > 0 ? this.setState({books: books}) : this.setState({books: []})
         })
-        this.setState({query: query})
+        this.setState({query:query})
     }
 
     render() {

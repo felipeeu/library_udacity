@@ -44,6 +44,6 @@ function BookShelf(props) {
 BookShelf.propTypes = {
     books: PropTypes.array.isRequired,
     changeBookShelf: PropTypes.func.isRequired,
-    shelves: PropTypes.object.isRequired
+    shelves: PropTypes.array
 }
 export default BookShelf

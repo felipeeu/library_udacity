@@ -16,7 +16,7 @@ function BookList(props) {
                                     backgroundImage: `url("${book.imageLinks.thumbnail}")`
                                 }}></div>
                                 <div className="book-shelf-changer">
-                                    <select value={'none'}
+                                    <select value={book.shelf}
                                             onChange={(event) => (changeBookShelf(book, event.target.value))}>
                                         <option value="none" disabled>Move to...</option>
                                         <option value="currentlyReading">Currently Reading</option>
