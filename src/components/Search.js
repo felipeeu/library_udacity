@@ -15,14 +15,17 @@ class Search extends React.Component {
     }
 
     updateQuery = (query) => {
-
+        const {books} = this.state;
         const trimmedQuery = query.trim()
-
-        BooksAPI.search(trimmedQuery, 20).then((booksqueried) => {
-            booksqueried && booksqueried.length > 0 ? this.setState({books: booksqueried}) : this.setState({books: []})
-        })
-
-        this.setState({query: query})
+        if (trimmedQuery) { // Has query ?
+            BooksAPI.search(trimmedQuery, 20).then((booksqueried) => {
+                booksqueried && booksqueried.length > 0 ? this.setState({books: booksqueried}) : this.setState({books: []})
+            })
+            this.setState({books})
+        } else { // If there isn't a query ...
+            this.setState({books: []})
+        }
+        this.setState({query})
     }
 
     render() {
@@ -47,7 +50,7 @@ class Search extends React.Component {
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <BookList books={books} changeBookShelf={changeBookShelf} />
+                    <BookList books={books} changeBookShelf={changeBookShelf}/>
                 </div>
             </div>)
     }
