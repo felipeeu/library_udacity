@@ -16,8 +16,9 @@ class Search extends React.Component {
 
     updateQuery = (query) => {
         const {books} = this.state;
-        const trimmedQuery = query.trim()
-        if (trimmedQuery) { // Has query ?
+        const trimmedQuery = query.trim();
+
+        if (trimmedQuery) { // Has a query ?
             BooksAPI.search(trimmedQuery, 20).then((booksqueried) => {
                 booksqueried && booksqueried.length > 0 ? this.setState({books: booksqueried}) : this.setState({books: []})
             })
@@ -26,11 +27,25 @@ class Search extends React.Component {
             this.setState({books: []})
         }
         this.setState({query})
+
+
     }
 
     render() {
+
         const {books} = this.state;
         const {changeBookShelf} = this.props;
+        //The shelves of the search result may be the current shelf
+        books.map(book => {
+            const bookFromShelf = this.props.books.find(shelfBook => shelfBook.id === book.id)
+
+            // if a book is at a shelf , it is showed in the select tag , else shelf is none
+            book.shelf = bookFromShelf !== undefined ? bookFromShelf.shelf : 'none'
+
+            return book
+        })
+
+
         return (
             <div className="search-books">
                 <div className="search-books-bar">
