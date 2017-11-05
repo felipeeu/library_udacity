@@ -5,13 +5,11 @@ import PropTypes from 'prop-types'
 //Component
 import BookList from "./BookList";
 
-
 class Search extends React.Component {
 
     state = {
-        books: [],
-        query: ''
-
+        books:[],
+        query:''
     }
 
     updateQuery = (query) => {
@@ -27,8 +25,6 @@ class Search extends React.Component {
             this.setState({books: []})
         }
         this.setState({query})
-
-
     }
 
     render() {
@@ -44,7 +40,6 @@ class Search extends React.Component {
 
             return book
         })
-
 
         return (
             <div className="search-books">

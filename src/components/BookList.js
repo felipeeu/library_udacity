@@ -13,7 +13,7 @@ const BookList = (props) => {
                                 <div className="book-cover" style={{
                                     width: 128,
                                     height: 193,
-                                    backgroundImage: `url("${book.imageLinks ? book.imageLinks.thumbnail : book }")`
+                                    backgroundImage: `url("${book.imageLinks ? book.imageLinks.thumbnail : book}")`
                                 }}/>
                                 <div className="book-shelf-changer">
                                     <select value={book.shelf}

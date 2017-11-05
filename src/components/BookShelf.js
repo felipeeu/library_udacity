@@ -7,15 +7,18 @@ import BookList from './BookList'
 const shelves = [
     {
         shelf: 'currentlyReading',
-        name: 'Currently Read'
+        name: 'Currently Read',
+        id: 1
     },
     {
         shelf: 'wantToRead',
-        name: 'Want to Read'
+        name: 'Want to Read',
+        id: 2
     },
     {
         shelf: 'read',
-        name: 'Read'
+        name: 'Read',
+        id: 3
     }];
 
 const BookShelf = (props) => {
@@ -24,7 +27,7 @@ const BookShelf = (props) => {
         <div className="list-books-content">
             <div>
                 {shelves.map(bookshelf => (
-                    <div key={bookshelf.shelf} className="bookshelf">
+                    <div key={bookshelf.id} className="bookshelf">
                         <h2 className="bookshelf-title">{bookshelf.name}</h2>
                         <div className="bookshelf-books">
                             <BookList
@@ -40,7 +43,6 @@ const BookShelf = (props) => {
                 ))}
             </div>
         </div>
-
     )
 }
 
