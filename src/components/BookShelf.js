@@ -23,20 +23,24 @@ const shelves = [
 
 const BookShelf = (props) => {
     const {books, changeBookShelf} = props;
+
+
     return (
         <div className="list-books-content">
             <div>
-                {shelves.map(bookshelf => (
+                {shelves && shelves.map(bookshelf => (
                     <div key={bookshelf.id} className="bookshelf">
                         <h2 className="bookshelf-title">{bookshelf.name}</h2>
                         <div className="bookshelf-books">
                             <BookList
+
                                 books={
                                     //filter books by shelves
-                                    books.filter(
+                                    books && books.filter(
                                         book => book.shelf === bookshelf.shelf
                                     )}
                                 changeBookShelf={changeBookShelf}
+
                             />
                         </div>
                     </div>

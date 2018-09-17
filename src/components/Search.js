@@ -33,10 +33,10 @@ class Search extends React.Component {
         const {changeBookShelf} = this.props;
         //The shelves of the search result may be the current shelf
         books.map(book => {
-            const bookFromShelf = this.props.books.find(shelfBook => shelfBook.id === book.id)
+            const bookFromShelf = this.props.books.find(shelfBook => shelfBook.id === book.id);
 
             // if a book is at a shelf , it is showed in the select tag , else shelf is none
-            book.shelf = bookFromShelf !== undefined ? bookFromShelf.shelf : 'none'
+            book.shelf = bookFromShelf !== undefined ? bookFromShelf.shelf : 'none';
 
             return book
         })
