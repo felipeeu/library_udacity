@@ -24,7 +24,6 @@ const shelves = [
 const BookShelf = (props) => {
     const {books, changeBookShelf} = props;
 
-
     return (
         <div className="list-books-content">
             <div>
@@ -33,7 +32,6 @@ const BookShelf = (props) => {
                         <h2 className="bookshelf-title">{bookshelf.name}</h2>
                         <div className="bookshelf-books">
                             <BookList
-
                                 books={
                                     //filter books by shelves
                                     books && books.filter(

@@ -22,20 +22,10 @@ class BooksApp extends React.Component {
 
     //Change the shelf based on select on BookList component then calls getAllBooks and sets book state
 
-    changeBookShelf = (book,shelf) => {
+    changeBookShelf = (book, shelf) => {
 
-           BooksAPI.update(book, shelf).then(() => this.getAllBooks())
-               //.then(document.location.assign('/'))
-
+        BooksAPI.update(book, shelf)
     };
-
-    putBookInShelf = (book,shelf) => {
-
-        BooksAPI.update(book, shelf).then(() => this.getAllBooks())
-        //.then(document.location.assign('/'))
-
-    };
-
 
     render() {
         const {books} = this.state;
@@ -48,7 +38,7 @@ class BooksApp extends React.Component {
                     </div>
                     <Routes books={books}
                             changeBookShelf={this.changeBookShelf}
-                            />
+                    />
                     <div className="open-search">
                         <Link to="/search"> Add a book</Link>
                     </div>
