@@ -15,12 +15,10 @@
     "test": "ava",
     "eject": "react-scripts eject"
   },
-
   "ava": {
     "files": [
       "src/test.js"
     ],
     "watch": true
   }
-
 }
