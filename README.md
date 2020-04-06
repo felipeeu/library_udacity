@@ -11,6 +11,13 @@ To get started developing right away:
 * install all project dependencies with `npm install`
 * start the development server with `npm start`
 
+## Demo
+
+![](./src/images/tela_inicial.gif)
+![](./src/images/change_shelf.gif)
+![](./src/images/search.gif)
+
+
 ## What You're Getting
 ```bash
 ├── CONTRIBUTING.md
