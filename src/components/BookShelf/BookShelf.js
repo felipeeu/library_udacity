@@ -1,35 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 //Component
-import BookList from "./BookList";
+import { BookList } from "components";
 
 //list shelf with its shelf names
 const shelves = [
   {
     shelf: "currentlyReading",
     name: "Currently Read",
-    id: 1
+    id: 1,
   },
   {
     shelf: "wantToRead",
     name: "Want to Read",
-    id: 2
+    id: 2,
   },
   {
     shelf: "read",
     name: "Read",
-    id: 3
-  }
+    id: 3,
+  },
 ];
 
-const BookShelf = props => {
+const BookShelf = (props) => {
   const { books, changeBookShelf, shelf } = props;
-
+  console.log("PROPS BOOKSHElf: ", props);
   return (
     <div className="list-books-content">
       <div>
         {shelves &&
-          shelves.map(bookshelf => {
+          shelves.map((bookshelf) => {
             const shelfName = bookshelf.shelf;
             const idArray = shelf[shelfName];
 
@@ -41,7 +41,8 @@ const BookShelf = props => {
                     books={
                       books &&
                       books.filter(
-                        book => idArray && idArray.find(id => id === book.id)
+                        (book) =>
+                          idArray && idArray.find((id) => id === book.id)
                       )
                     }
                     changeBookShelf={changeBookShelf}
@@ -58,6 +59,6 @@ const BookShelf = props => {
 BookShelf.propTypes = {
   books: PropTypes.array.isRequired,
   changeBookShelf: PropTypes.func.isRequired,
-  shelves: PropTypes.array
+  shelves: PropTypes.array,
 };
-export default BookShelf;
+export { BookShelf };

@@ -1,13 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const BookList = props => {
+const BookList = (props) => {
   const { books, changeBookShelf } = props;
 
   return (
     <ol className="books-grid">
       {books &&
-        books.map(book => (
+        books.map((book) => (
           <li key={book.id}>
             <div className="book">
               <div className="book-top">
@@ -18,13 +18,13 @@ const BookList = props => {
                     height: 193,
                     backgroundImage: `url("${
                       book.imageLinks ? book.imageLinks.thumbnail : book
-                    }")`
+                    }")`,
                   }}
                 />
                 <div className="book-shelf-changer">
                   <select
                     value={book.shelf}
-                    onChange={event =>
+                    onChange={(event) =>
                       changeBookShelf(book, event.target.value)
                     }
                   >
@@ -49,7 +49,7 @@ const BookList = props => {
 
 BookList.propTypes = {
   books: PropTypes.array.isRequired,
-  changeBookShelf: PropTypes.func.isRequired
+  changeBookShelf: PropTypes.func.isRequired,
 };
 
-export default BookList;
+export { BookList };
