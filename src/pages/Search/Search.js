@@ -1,32 +1,33 @@
 import React, { useCallback, useState } from "react";
 import * as BooksAPI from "connectors/BooksAPI";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { BookList } from "components";
-import propTypes from "prop-types";
 
-const Search = ({ changeBookShelf }) => {
+import { Book, NotFound } from "components/BookList/subcomponents";
+
+const Search = (props) => {
   const [books, setBooks] = useState([]);
-  const [queryState, setQueryState] = useState();
+  const [queryState, setQueryState] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
 
   const searchBooks = (query, maxResults) => {
     BooksAPI.search(query, maxResults)
       .then((booksQueried) => {
-        booksQueried ? setBooks(booksQueried) : setBooks([]);
+        booksQueried ? setBooks([...booksQueried]) : setBooks([]);
+        setIsSearching(false);
       })
       .catch((error) => alert("only letters"));
   };
-
+  console.log(isSearching);
   const updateQuery = useCallback(
     (query) => {
-      const parsedQuery = query.toString();
-      const trimmedQuery = parsedQuery.trim();
+      const trimmedQuery = query.trim();
 
       if (trimmedQuery) {
-        searchBooks(query, 20);
+        searchBooks(trimmedQuery, 20);
       } else {
         setBooks([]);
       }
+      setIsSearching(true);
       setQueryState(trimmedQuery);
     },
     [books, queryState]
@@ -47,7 +48,20 @@ const Search = ({ changeBookShelf }) => {
         </div>
       </div>
       <div className="search-books-results">
-        <BookList books={books} changeBookShelf={changeBookShelf} />
+        <ol className="books-grid">
+          {!isSearching ? (
+            books.map((book) => (
+              <Book
+                key={book.id}
+                book={book}
+                noneShelfDisabled={true}
+                {...props}
+              />
+            ))
+          ) : (
+            <NotFound query={queryState} isSearching={isSearching} />
+          )}
+        </ol>
       </div>
     </div>
   );
@@ -65,10 +79,4 @@ const Search = ({ changeBookShelf }) => {
 //   return book;
 // });
 
-Search.propTypes = {
-  query: PropTypes.string,
-  books: PropTypes.array,
-  changeBookShelf: PropTypes.func,
-  updateQuery: propTypes.func,
-};
 export { Search };

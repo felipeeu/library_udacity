@@ -1,14 +1,13 @@
-import React, { useEffect, useState, useCallback } from "react";
-import * as BooksAPI from "./connectors/BooksAPI";
+import React, { useCallback, useEffect, useState } from "react";
 import "./App.css";
-import { Link } from "react-router-dom";
-import { filterBooksByShelves } from "utils/helpers/books";
 import { Routes } from "Routes";
+import * as BooksAPI from "connectors/BooksAPI";
 import {
   BOOK_WANTED_TO_READ,
   BOOK_CURRENTLY_READING,
   BOOK_READED,
-} from "./utils/constants";
+} from "utils/constants";
+import { filterBooksByShelves } from "utils/helpers/books";
 
 const App = () => {
   const [bookData, setbookData] = useState();
@@ -17,8 +16,22 @@ const App = () => {
     [BOOK_WANTED_TO_READ]: [],
     [BOOK_READED]: [],
   });
+  const changeBookShelf = useCallback(
+    (book, shelf) => {
+      BooksAPI.update(book, shelf)
+        .then((data) =>
+          setShelves({
+            [BOOK_CURRENTLY_READING]: data[BOOK_CURRENTLY_READING],
+            [BOOK_WANTED_TO_READ]: data[BOOK_WANTED_TO_READ],
+            [BOOK_READED]: data[BOOK_READED],
+          })
+        )
+        .catch((err) => console.error(err));
+    },
+    [shelves]
+  );
 
-  useEffect(() => {
+  const getAllBooks = useCallback(() => {
     BooksAPI.getAll()
       .then((response) => {
         setbookData(response);
@@ -35,39 +48,20 @@ const App = () => {
         });
       })
       .catch((err) => err);
-  }, []);
+  }, [bookData]);
 
-  const changeBookShelf = useCallback(
-    (book, shelf) => {
-      console.log("Book:", book);
-      BooksAPI.update(book, shelf)
-        .then((data) =>
-          setShelves({
-            [BOOK_CURRENTLY_READING]: data[BOOK_CURRENTLY_READING],
-            [BOOK_WANTED_TO_READ]: data[BOOK_WANTED_TO_READ],
-            [BOOK_READED]: data[BOOK_READED],
-          })
-        )
-        .catch((err) => console.error(err));
-    },
-    [shelves]
-  );
+  useEffect(() => {
+    getAllBooks();
+  }, []);
 
   return (
     <div className="app">
-      <div className="list-books">
-        <div className="list-books-title">
-          <h1>Felipe's Books</h1>
-        </div>
-        <Routes
-          books={bookData}
-          changeBookShelf={changeBookShelf}
-          shelf={shelves}
-        />
-        <div className="open-search">
-          <Link to="/search"> Add a book</Link>
-        </div>
-      </div>
+      <Routes
+        changeBookShelf={changeBookShelf}
+        bookData={bookData}
+        shelves={shelves}
+        setShelves={setShelves}
+      />
     </div>
   );
 };

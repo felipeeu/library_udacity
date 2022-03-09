@@ -2,20 +2,11 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Home, Search } from "pages";
 
-const Routes = (props, { childProps }) => {
+const Routes = (props) => {
   return (
     <Switch>
-      <Route
-        path="/search"
-        render={() => <Search {...props} />}
-        props={childProps}
-      />
-      <Route
-        path="/"
-        exact
-        render={() => <Home {...props} />}
-        props={childProps}
-      />
+      <Route path="/search" render={() => <Search {...props} />} />
+      <Route path="/" exact render={() => <Home {...props} />} />
     </Switch>
   );
 };

@@ -1,55 +1,34 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import * as BooksAPI from "connectors/BooksAPI";
+import { Book } from "components/BookList/subcomponents";
+
+// import {
+//   BOOK_WANTED_TO_READ,
+//   BOOK_CURRENTLY_READING,
+//   BOOK_READED,
+// } from "utils/constants";
 
 const BookList = (props) => {
-  const { books, changeBookShelf } = props;
-
+  const { books } = props;
+  // const changeBookShelf = useCallback(
+  //   (book, shelf) => {
+  //     BooksAPI.update(book, shelf)
+  //       .then((data) =>
+  //         setShelves({
+  //           [BOOK_CURRENTLY_READING]: data[BOOK_CURRENTLY_READING],
+  //           [BOOK_WANTED_TO_READ]: data[BOOK_WANTED_TO_READ],
+  //           [BOOK_READED]: data[BOOK_READED],
+  //         })
+  //       )
+  //       .catch((err) => console.error(err));
+  //   },
+  //   [shelves]
+  // );
   return (
     <ol className="books-grid">
-      {books &&
-        books.map((book) => (
-          <li key={book.id}>
-            <div className="book">
-              <div className="book-top">
-                <div
-                  className="book-cover"
-                  style={{
-                    width: 128,
-                    height: 193,
-                    backgroundImage: `url("${
-                      book.imageLinks ? book.imageLinks.thumbnail : book
-                    }")`,
-                  }}
-                />
-                <div className="book-shelf-changer">
-                  <select
-                    value={book.shelf}
-                    onChange={(event) =>
-                      changeBookShelf(book, event.target.value)
-                    }
-                  >
-                    <option value="none" disabled>
-                      Move to...
-                    </option>
-                    <option value="currentlyReading">Currently Reading</option>
-                    <option value="wantToRead">Want to Read</option>
-                    <option value="read">Read</option>
-                    <option value="none">None</option>
-                  </select>
-                </div>
-              </div>
-              <div className="book-title">{book.title}</div>
-              <div className="book-authors">{book.authors}</div>
-            </div>
-          </li>
-        ))}
+      {books && books.map((book) => <Book key={book.id} book={book} />)}
     </ol>
   );
-};
-
-BookList.propTypes = {
-  books: PropTypes.array.isRequired,
-  changeBookShelf: PropTypes.func.isRequired,
 };
 
 export { BookList };
