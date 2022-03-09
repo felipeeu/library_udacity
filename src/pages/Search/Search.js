@@ -15,9 +15,9 @@ const Search = (props) => {
         booksQueried ? setBooks([...booksQueried]) : setBooks([]);
         setIsSearching(false);
       })
-      .catch((error) => alert("only letters"));
+      .catch((error) => error);
   };
-  console.log(isSearching);
+
   const updateQuery = useCallback(
     (query) => {
       const trimmedQuery = query.trim();

@@ -26,7 +26,7 @@ const App = () => {
             [BOOK_READED]: data[BOOK_READED],
           })
         )
-        .catch((err) => console.error(err));
+        .catch((error) => error);
     },
     [shelves]
   );
